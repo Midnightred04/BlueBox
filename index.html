@@ -1,59 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Black Box</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --blue-1: #0d1b2a;
+      --blue-2: #1b263b;
+      --blue-3: #415a77;
+      --blue-4: #778da9;
+      --accent: #00bfff;
+      --text-light: #f1f5f9;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(to bottom, #0f0f1a, #1f1f2e);
-      color: white;
+      height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--blue-1);
+      color: var(--text-light);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 2rem;
-      color: #00bfff;
-      text-shadow: 0 0 15px #00bfff;
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 30px;
+      text-align: center;
     }
 
     .login-box {
-      background: #15151f;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px #00bfff;
+      background-color: var(--blue-2);
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 400px;
     }
 
     input[type="password"] {
-      padding: 10px;
+      padding: 12px 16px;
       font-size: 1rem;
       border: none;
-      border-radius: 10px;
-      margin-right: 10px;
-      width: 200px;
+      border-radius: 12px;
+      background-color: var(--blue-3);
+      color: white;
+      width: 100%;
+      margin-bottom: 20px;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 12px 20px;
       font-size: 1rem;
       border: none;
-      border-radius: 10px;
-      background-color: #00bfff;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue-4), var(--accent));
       color: white;
       cursor: pointer;
-      box-shadow: 0 0 10px #00bfff;
-      transition: 0.3s;
+      transition: background 0.3s ease;
+      width: 100%;
     }
 
     button:hover {
-      background-color: #009acd;
+      background: linear-gradient(135deg, var(--accent), var(--blue-4));
     }
   </style>
 </head>
