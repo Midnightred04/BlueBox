@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Black Box - Main</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #0a0a14, #1a1a2b);
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px;
+      font-size: 3rem;
+      color: #00bfff;
+      text-shadow: 0 0 15px #00bfff;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      padding: 30px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .box {
+      flex: 1 1 40%;
+      background-color: #15151f;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00bfff;
+      display: flex;
+      flex-direction: column;
+      height: 80vh;
+      overflow-y: auto;
+      min-width: 300px;
+    }
+
+    .box h2 {
+      margin-top: 0;
+      text-align: center;
+      font-size: 1.5rem;
+      color: #00bfff;
+    }
+
+    .entry {
+      background: #1e1e2d;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #009acd;
+    }
+
+    .add-button {
+      margin-top: auto;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #00bfff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .add-button:hover {
+      background-color: #009acd;
+    }
+
+    .modal-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal {
+      background: #15151f;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00bfff;
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+    }
+
+    .modal input, .modal textarea {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      background-color: #1e1e2d;
+      color: white;
+    }
+
+    .modal button {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .modal button:hover {
+      background-color: #009acd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Black Box</h1>
+  <div class="container">
+    <div class="box" id="gossip-box">
+      <h2>Gossip</h2>
+      <!-- Gossip entries go here -->
+      <button class="add-button" onclick="openModal('gossip')">Add New</button>
+    </div>
+    <div class="box" id="plans-box">
+      <h2>Plans</h2>
+      <!-- Plans entries go here -->
+      <button class="add-button" onclick="openModal('plans')">Add New</button>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal">
+      <input type="text" id="entry-title" placeholder="Title" />
+      <textarea id="entry-desc" placeholder="Description" rows="4"></textarea>
+      <button onclick="addEntry()">Add</button>
+    </div>
+  </div>
+
+  <!-- Firebase + App Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // 🔥 Replace this with your actual Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCd-bOBCPclL-A2GWPosoSX-MOMTtQFi5M",
+      authDomain: "black-box-44047.firebaseapp.com",
+      projectId: "black-box-44047",
+      storageBucket: "black-box-44047.firebasestorage.app",
+      messagingSenderId: "1007734936886",
+      appId: "1:1007734936886:web:696655ce5befea36120f97"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let currentType = '';
+
+    window.openModal = function(type) {
+      currentType = type;
+      document.getElementById('modal-bg').style.display = 'flex';
+    };
+
+    window.addEntry = async function() {
+      const title = document.getElementById('entry-title').value.trim();
+      const desc = document.getElementById('entry-desc').value.trim();
+      if (!title || !desc) {
+        alert("Both title and description are required.");
+        return;
+      }
+
+      await addDoc(collection(db, currentType), {
+        title,
+        desc,
+        timestamp: serverTimestamp()
+      });
+
+      document.getElementById('entry-title').value = '';
+      document.getElementById('entry-desc').value = '';
+      document.getElementById('modal-bg').style.display = 'none';
+      refreshSection(currentType);
+    };
+
+    async function refreshSection(type) {
+      const box = document.getElementById(`${type}-box`);
+      box.innerHTML = `<h2>${type.charAt(0).toUpperCase() + type.slice(1)}</h2><button class="add-button" onclick="openModal('${type}')">Add New</button>`;
+      const q = query(collection(db, type), orderBy("timestamp", "desc"));
+      const snapshot = await getDocs(q);
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.innerHTML = `<strong>${data.title}</strong><p>${data.desc}</p>`;
+        box.insertBefore(div, box.lastElementChild);
+      });
+    }
+
+    async function loadEntries() {
+      await refreshSection('gossip');
+      await refreshSection('plans');
+    }
+
+    window.onload = loadEntries;
+  </script>
+</body>
+</html>
