@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Black Box</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #0f0f1a, #1f1f2e);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #00bfff;
+      text-shadow: 0 0 15px #00bfff;
+    }
+
+    .login-box {
+      background: #15151f;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00bfff;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      margin-right: 10px;
+      width: 200px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #00bfff;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00bfff;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #009acd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Black Box</h1>
+  <div class="login-box">
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="checkPassword()">Enter</button>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById('password').value;
+      if (password === 'lemmein') {
+        window.location.href = 'main.html';
+      } else {
+        alert('Wrong password!');
+      }
+    }
+  </script>
+</body>
+</html>
