@@ -161,7 +161,18 @@
     .modal button:hover {
       background-color: #009acd;
     }
-    .logout-button {
+    .top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.logout-button {
   padding: 10px 18px;
   font-size: 0.95rem;
   border: none;
@@ -176,13 +187,16 @@
   background-color: #5f7ca0;
 }
 
+
   </style>
 </head>
 <body>
-  <h1>Blue Box</h1>
-  <div style="text-align: center; margin-top: -10px; margin-bottom: 20px;">
+  <div class="top-bar">
   <button class="logout-button" onclick="logout()">Logout</button>
-  </div>
+</div>
+
+  <h1>Blue Box</h1>
+
   <div class="container">
     <div class="box" id="gossip-box">
       <h2>Gossip</h2>
