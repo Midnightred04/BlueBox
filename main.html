@@ -186,6 +186,19 @@
 .logout-button:hover {
   background-color: #5f7ca0;
 }
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.cancel-button {
+  background-color: #4b5563;
+}
+
+.cancel-button:hover {
+  background-color: #374151;
+}
 
 
   </style>
@@ -210,10 +223,14 @@
 
   <div class="modal-bg" id="modal-bg">
     <div class="modal">
-      <input type="text" id="entry-title" placeholder="Title" />
-      <textarea id="entry-desc" placeholder="Description" rows="4"></textarea>
-      <button onclick="addEntry()">Add</button>
-    </div>
+  <input type="text" id="entry-title" placeholder="Title" />
+  <textarea id="entry-desc" placeholder="Description" rows="4"></textarea>
+  <div class="modal-buttons">
+    <button onclick="addEntry()">Add</button>
+    <button onclick="cancelEntry()" class="cancel-button">Cancel</button>
+  </div>
+</div>
+
   </div>
 
   <!-- Firebase + Logic -->
@@ -297,6 +314,12 @@
     window.logout = function () {
   window.location.href = "index.html";
 }
+  window.cancelEntry = function () {
+  document.getElementById('entry-title').value = '';
+  document.getElementById('entry-desc').value = '';
+  document.getElementById('modal-bg').style.display = 'none';
+};
+
 
   </script>
 </body>
