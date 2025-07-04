@@ -6,202 +6,206 @@
   <title>Blue Box - Main</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --blue-1: #0d1b2a;
-      --blue-2: #1b263b;
-      --blue-3: #415a77;
-      --blue-4: #778da9;
-      --accent: #00bfff;
-      --text-light: #f1f5f9;
-      --shadow: rgba(0, 0, 0, 0.2);
-    }
+  :root {
+    --blue-1: #0d1b2a;
+    --blue-2: #1b263b;
+    --blue-3: #415a77;
+    --blue-4: #778da9;
+    --accent: #00bfff;
+    --text-light: #f1f5f9;
+    --shadow: rgba(0, 0, 0, 0.2);
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: var(--blue-1);
-      color: var(--text-light);
-    }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--blue-1);
+    color: var(--text-light);
+  }
 
-    h1 {
-      text-align: center;
-      margin: 20px 0;
-      font-size: 2.5rem;
-      color: var(--accent);
-    }
+  h1 {
+    text-align: center;
+    margin: 20px 0 40px;
+    font-size: 2.5rem;
+    color: var(--accent);
+  }
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      padding: 20px;
-    }
+  .top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+  }
 
-    .box {
-      background-color: var(--blue-2);
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px var(--shadow);
-      flex: 1 1 400px;
-      max-width: 500px;
-      height: 80vh;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
+  .logout-button {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--blue-4);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
 
-    .box h2 {
-      text-align: center;
-      color: var(--blue-4);
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
+  .logout-button:hover {
+    background-color: #5f7ca0;
+  }
 
-    .entry {
-      background-color: var(--blue-3);
-      margin-bottom: 15px;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px var(--shadow);
-    }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+  }
 
-    .entry strong {
-      font-weight: 600;
-      color: #e0f7ff;
-    }
+  .box {
+    background-color: var(--blue-2);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px var(--shadow);
+    flex: 1 1 400px;
+    max-width: 500px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
 
-    .entry p {
-      margin: 8px 0 0;
-      color: #d1e9ff;
-    }
+  .box h2 {
+    text-align: center;
+    color: var(--blue-4);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
 
-    .entry button {
-      background-color: #ef4444;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 5px 10px;
-      margin-top: 10px;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
+  .entry {
+    background-color: var(--blue-3);
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px var(--shadow);
+  }
 
-    .entry button:hover {
-      background-color: #dc2626;
-    }
+  .entry strong {
+    font-weight: 600;
+    color: #e0f7ff;
+  }
 
-    .add-button {
-  margin-top: auto;
-  padding: 12px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 12px;
-  background-color: var(--blue-4);
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+  .entry p {
+    margin: 8px 0 0;
+    color: #d1e9ff;
+  }
 
-.add-button:hover {
-  background-color: #5f7ca0; /* slightly darker than --blue-4 */
-}
+  .entry button {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
 
+  .entry button:hover {
+    background-color: #dc2626;
+  }
 
-    .modal-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(5px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-    }
+  .add-button {
+    margin-top: auto;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--blue-4);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
 
-    .modal {
-      background-color: var(--blue-2);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 0 15px var(--shadow);
-      width: 320px;
-      display: flex;
-      flex-direction: column;
-    }
+  .add-button:hover {
+    background-color: #5f7ca0;
+  }
 
-    .modal input,
-    .modal textarea {
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      background-color: var(--blue-3);
-      color: white;
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
+  .modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
 
-    .modal button {
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: var(--accent);
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+  .modal {
+    background-color: var(--blue-2);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 15px var(--shadow);
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .modal button:hover {
-      background-color: #009acd;
-    }
-    .top-bar {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 15px 20px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 10;
-}
+  .modal input,
+  .modal textarea {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--blue-3);
+    color: white;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
 
-.logout-button {
-  padding: 10px 18px;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 12px;
-  background-color: var(--blue-4);
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+  .modal-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+  }
 
-.logout-button:hover {
-  background-color: #5f7ca0;
-}
-.modal-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
+  .modal-button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+  }
 
-.cancel-button {
-  background-color: #4b5563;
-}
+  .modal-button.add {
+    background-color: var(--accent);
+  }
 
-.cancel-button:hover {
-  background-color: #374151;
-}
+  .modal-button.add:hover {
+    background-color: #0090c0;
+  }
 
+  .modal-button.cancel {
+    background-color: #4b5563;
+  }
 
-  </style>
+  .modal-button.cancel:hover {
+    background-color: #374151;
+  }
+</style>
+
 </head>
 <body>
   <div class="top-bar">
@@ -226,9 +230,10 @@
   <input type="text" id="entry-title" placeholder="Title" />
   <textarea id="entry-desc" placeholder="Description" rows="4"></textarea>
   <div class="modal-buttons">
-    <button onclick="addEntry()">Add</button>
-    <button onclick="cancelEntry()" class="cancel-button">Cancel</button>
-  </div>
+  <button class="modal-button add" onclick="addEntry()">Add</button>
+  <button class="modal-button cancel" onclick="cancelEntry()">Cancel</button>
+</div>
+
 </div>
 
   </div>
