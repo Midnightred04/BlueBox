@@ -1,245 +1,251 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blue Box - Main</title>
+  <title>Black Box</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-  :root {
-    --blue-1: #0d1b2a;
-    --blue-2: #1b263b;
-    --blue-3: #415a77;
-    --blue-4: #778da9;
-    --accent: #00bfff;
-    --text-light: #f1f5f9;
-    --shadow: rgba(0, 0, 0, 0.2);
-  }
+    :root {
+      --blue-1: #0d1b2a;
+      --blue-2: #1b263b;
+      --blue-3: #415a77;
+      --blue-4: #778da9;
+      --accent: #00bfff;
+      --text-light: #f1f5f9;
+      --shadow: rgba(0, 0, 0, 0.2);
+    }
 
-  * {
-    box-sizing: border-box;
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--blue-1);
-    color: var(--text-light);
-  }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--blue-1);
+      color: var(--text-light);
+    }
 
-  h1 {
-    text-align: center;
-    margin: 20px 0 40px;
-    font-size: 2.5rem;
-    color: var(--accent);
-  }
+    h1 {
+      text-align: center;
+      margin: 20px 0 40px;
+      font-size: 2.5rem;
+      color: var(--accent);
+    }
 
-  .top-bar {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding: 15px 20px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-  }
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px 20px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+    }
 
-  .logout-button {
-    padding: 10px 18px;
-    font-size: 0.95rem;
-    border: none;
-    border-radius: 12px;
-    background-color: var(--blue-4);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
+    .logout-button {
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 12px;
+      background-color: var(--blue-4);
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
 
-  .logout-button:hover {
-    background-color: #5f7ca0;
-  }
+    .logout-button:hover {
+      background-color: #5f7ca0;
+    }
 
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    padding: 20px;
-  }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
 
-  .box {
-    background-color: var(--blue-2);
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px var(--shadow);
-    flex: 1 1 400px;
-    max-width: 500px;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-  }
+    .box {
+      background-color: var(--blue-2);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px var(--shadow);
+      flex: 1 1 400px;
+      max-width: 500px;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
 
-  .box h2 {
-    text-align: center;
-    color: var(--blue-4);
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
+    .box h2 {
+      text-align: center;
+      color: var(--blue-4);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
 
-  .entry {
-    background-color: var(--blue-3);
-    margin-bottom: 15px;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px var(--shadow);
-  }
+    .entry {
+      background-color: var(--blue-3);
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
 
-  .entry strong {
-    font-weight: 600;
-    color: #e0f7ff;
-  }
+    .entry strong {
+      font-weight: 600;
+      color: #e0f7ff;
+    }
 
-  .entry p {
-    margin: 8px 0 0;
-    color: #d1e9ff;
-  }
+    .entry p {
+      margin: 8px 0 0;
+      color: #d1e9ff;
+    }
 
-  .entry button {
-    background-color: #e4e4f0;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 5px 10px;
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 0.85rem;
-  }
+    .gossip-desc {
+      text-align: justify;
+      text-justify: inter-word;
+    }
 
-  .entry button:hover {
-    background-color: #c9c9d6;
-  }
+    .entry button {
+      background-color: #ef5a5a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background-color 0.2s ease;
+    }
 
-  .add-button {
-    margin-top: auto;
-    padding: 12px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 12px;
-    background-color: var(--blue-4);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
+    .entry button:hover {
+      background-color: #dc3b3b;
+    }
 
-  .add-button:hover {
-    background-color: #5f7ca0;
-  }
+    .add-button {
+      margin-top: auto;
+      padding: 12px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      background-color: var(--blue-4);
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
 
-  .modal-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-  }
+    .add-button:hover {
+      background-color: #5f7ca0;
+    }
 
-  .modal {
-    background-color: var(--blue-2);
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 0 15px var(--shadow);
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-  }
+    .modal-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
 
-  .modal input,
-  .modal textarea {
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    background-color: var(--blue-3);
-    color: white;
-    margin-bottom: 10px;
-    font-size: 1rem;
-  }
+    .modal {
+      background-color: var(--blue-2);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px var(--shadow);
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+    }
 
-  .modal-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 10px;
-  }
+    .modal input,
+    .modal textarea {
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background-color: var(--blue-3);
+      color: white;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
 
-  .modal-button {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    color: white;
-  }
+    .modal-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
 
-  .modal-button.add {
-    background-color: var(--accent);
-  }
+    .modal-button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+    }
 
-  .modal-button.add:hover {
-    background-color: #0090c0;
-  }
+    .modal-button.add {
+      background-color: var(--accent);
+    }
 
-  .modal-button.cancel {
-    background-color: #4b5563;
-  }
+    .modal-button.add:hover {
+      background-color: #0090c0;
+    }
 
-  .modal-button.cancel:hover {
-    background-color: #374151;
-  }
-</style>
+    .modal-button.cancel {
+      background-color: #4b5563;
+    }
 
+    .modal-button.cancel:hover {
+      background-color: #374151;
+    }
+  </style>
 </head>
 <body>
   <div class="top-bar">
-  <button class="logout-button" onclick="logout()">Logout</button>
-</div>
-
-  <h1>Blue Box</h1>
-
+    <button class="logout-button" onclick="logout()">Logout</button>
+  </div>
+  <h1>Black Box</h1>
   <div class="container">
     <div class="box" id="gossip-box">
       <h2>Gossip</h2>
+      <div id="gossip-entries"></div>
       <button class="add-button" onclick="openModal('gossip')">Add New</button>
     </div>
     <div class="box" id="plans-box">
       <h2>Plans</h2>
+      <div id="plans-entries"></div>
       <button class="add-button" onclick="openModal('plans')">Add New</button>
     </div>
   </div>
 
   <div class="modal-bg" id="modal-bg">
     <div class="modal">
-  <input type="text" id="entry-title" placeholder="Title" />
-  <textarea id="entry-desc" placeholder="Description" rows="4"></textarea>
-  <div class="modal-buttons">
-  <button class="modal-button add" onclick="addEntry()">Add</button>
-  <button class="modal-button cancel" onclick="cancelEntry()">Cancel</button>
-</div>
-
-</div>
-
+      <input type="text" id="entry-title" placeholder="Title" />
+      <textarea id="entry-desc" placeholder="Description" rows="4"></textarea>
+      <div class="modal-buttons">
+        <button class="modal-button add" onclick="addEntry()">Add</button>
+        <button class="modal-button cancel" onclick="cancelEntry()">Cancel</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Firebase + Logic -->
   <script type="module">
+    // Firebase import
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import {
       getFirestore, collection, addDoc, getDocs, deleteDoc,
@@ -258,74 +264,73 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    let currentType = '';
+    const gossipRef = collection(db, "gossip");
+    const plansRef = collection(db, "plans");
 
-    window.openModal = function (type) {
-      currentType = type;
-      document.getElementById('modal-bg').style.display = 'flex';
-    };
+    const gossipBox = document.getElementById("gossip-entries");
+    const plansBox = document.getElementById("plans-entries");
 
-    window.addEntry = async function () {
-      const title = document.getElementById('entry-title').value.trim();
-      const desc = document.getElementById('entry-desc').value.trim();
-      if (!title || !desc) {
-        alert("Please fill out both fields.");
-        return;
-      }
+    function renderEntry(docData, id, type) {
+      const entry = document.createElement("div");
+      entry.className = "entry";
+      entry.innerHTML = `
+        <strong>${docData.title}</strong>
+        <p class="${type === 'gossip' ? 'gossip-desc' : ''}">${docData.description}</p>
+        <button onclick="deleteEntry('${id}', '${type}')">Delete</button>
+      `;
+      return entry;
+    }
 
-      await addDoc(collection(db, currentType), {
-        title,
-        desc,
-        timestamp: serverTimestamp()
+    function displayEntries() {
+      onSnapshot(gossipRef, (snapshot) => {
+        gossipBox.innerHTML = "";
+        snapshot.forEach((doc) => {
+          gossipBox.appendChild(renderEntry(doc.data(), doc.id, "gossip"));
+        });
       });
 
-      document.getElementById('entry-title').value = '';
-      document.getElementById('entry-desc').value = '';
-      document.getElementById('modal-bg').style.display = 'none';
-      refreshSection(currentType);
-    };
-
-    window.deleteEntry = async function (type, id) {
-      if (confirm("Are you sure you want to delete this?")) {
-        await deleteDoc(doc(db, type, id));
-        refreshSection(type);
-      }
-    };
-
-    async function refreshSection(type) {
-      const box = document.getElementById(`${type}-box`);
-      box.innerHTML = `<h2>${type.charAt(0).toUpperCase() + type.slice(1)}</h2><button class="add-button" onclick="openModal('${type}')">Add New</button>`;
-
-      const q = query(collection(db, type), orderBy("timestamp", "desc"));
-      const snapshot = await getDocs(q);
-
-      snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const div = document.createElement('div');
-        div.className = 'entry';
-        div.innerHTML = `
-          <strong>${data.title}</strong>
-          <p>${data.desc}</p>
-          <button onclick="deleteEntry('${type}', '${docSnap.id}')">Delete</button>
-        `;
-        box.insertBefore(div, box.lastElementChild);
+      onSnapshot(plansRef, (snapshot) => {
+        plansBox.innerHTML = "";
+        snapshot.forEach((doc) => {
+          plansBox.appendChild(renderEntry(doc.data(), doc.id, "plans"));
+        });
       });
     }
 
-    window.onload = () => {
-      refreshSection('gossip');
-      refreshSection('plans');
+    displayEntries();
+
+    let currentType = "gossip";
+
+    window.openModal = function (type) {
+      currentType = type;
+      document.getElementById("modal-bg").style.display = "flex";
     };
+
+    window.cancelEntry = function () {
+      document.getElementById("entry-title").value = "";
+      document.getElementById("entry-desc").value = "";
+      document.getElementById("modal-bg").style.display = "none";
+    };
+
+    window.addEntry = async function () {
+      const title = document.getElementById("entry-title").value.trim();
+      const desc = document.getElementById("entry-desc").value.trim();
+      if (!title || !desc) return;
+
+      const ref = currentType === "gossip" ? gossipRef : plansRef;
+      await addDoc(ref, { title, description: desc });
+
+      cancelEntry();
+    };
+
+    window.deleteEntry = async function (id, type) {
+      const ref = doc(db, type, id);
+      await deleteDoc(ref);
+    };
+
     window.logout = function () {
-  window.location.href = "index.html";
-}
-  window.cancelEntry = function () {
-  document.getElementById('entry-title').value = '';
-  document.getElementById('entry-desc').value = '';
-  document.getElementById('modal-bg').style.display = 'none';
-};
-
-
+      window.location.href = "index.html";
+    };
   </script>
 </body>
 </html>
