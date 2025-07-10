@@ -319,13 +319,21 @@
         const data = docSnap.data();
         const div = document.createElement('div');
         div.className = 'entry';
-        div.innerHTML = `
-          <strong>${data.title}</strong>
-          <p class="${type === 'gossip' ? 'gossip-desc' : ''}">${data.desc}</p>
-          <button onclick="deleteEntry('${type}', '${docSnap.id}')">Delete</button>
-        `;
-        box.insertBefore(div, box.lastElementChild);
-      });
+        const dateStr = data.timestamp?.toDate
+  ? data.timestamp.toDate().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
+  : '';
+
+div.innerHTML = `
+  <strong>${data.title}</strong>
+  <div style="font-size: 0.75rem; color: #a0b3c2; margin-top: 4px; margin-bottom: 8px;">${dateStr}</div>
+  <p class="${type === 'gossip' ? 'gossip-desc' : ''}">${data.desc}</p>
+  <button onclick="deleteEntry('${type}', '${docSnap.id}')">Delete</button>
+`;
+
     }
 
     window.onload = () => {
