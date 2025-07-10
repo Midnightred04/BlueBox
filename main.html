@@ -311,7 +311,7 @@
         div.className = 'entry';
         div.innerHTML = `
           <strong>${data.title}</strong>
-          <p>${data.desc}</p>
+          <p class="${type === 'gossip' ? 'gossip-desc' : ''}">${data.desc}</p>
           <button onclick="deleteEntry('${type}', '${docSnap.id}')">Delete</button>
         `;
         box.insertBefore(div, box.lastElementChild);
