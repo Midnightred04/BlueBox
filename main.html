@@ -7,13 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-  --background: #1c1c1e;
-  --box-bg: #2c2c2e;
-  --button-bg: #0a84ff;
-  --button-hover: #0060df;
-  --text-main: #f5f5f7;
-  --text-secondary: #9a9a9d;
-  --shadow: rgba(0, 0, 0, 0.4);
+  --background: #f9f7f1;
+  --box-bg: #ffffff;
+  --border-color: #dcdcdc;
+  --headline: #222;
+  --text: #333;
+  --meta-text: #777;
+  --button-bg: #444;
+  --button-hover: #222;
 }
 
 * {
@@ -22,16 +23,19 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  font-family: 'Georgia', serif;
   background: var(--background);
-  color: var(--text-main);
+  color: var(--text);
 }
 
 h1 {
   text-align: center;
-  margin: 20px 0 40px;
-  font-size: 2.5rem;
-  font-weight: 600;
+  margin: 20px 0 30px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--headline);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
 }
 
 .top-bar {
@@ -39,21 +43,16 @@ h1 {
   display: flex;
   justify-content: flex-end;
   padding: 15px 20px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 10;
 }
 
 .logout-button {
-  padding: 10px 18px;
+  padding: 10px 20px;
   font-size: 0.95rem;
-  border: none;
-  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   background: var(--button-bg);
-  color: white;
+  color: #fff;
   cursor: pointer;
-  box-shadow: 0 1px 3px var(--shadow);
   transition: background 0.2s ease;
 }
 
@@ -71,9 +70,10 @@ h1 {
 
 .box {
   background: var(--box-bg);
+  border: 1px solid var(--border-color);
   padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px var(--shadow);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   flex: 1 1 400px;
   max-width: 500px;
   height: 80vh;
@@ -83,42 +83,46 @@ h1 {
 }
 
 .box h2 {
+  font-family: 'Georgia', serif;
+  font-size: 1.8rem;
   text-align: center;
-  color: var(--text-secondary);
-  font-weight: 600;
   margin-bottom: 20px;
+  color: var(--headline);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
 }
 
 .entry {
-  background: rgba(255, 255, 255, 0.05);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px var(--shadow);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .entry strong {
+  display: block;
+  font-family: 'Georgia', serif;
   font-weight: 700;
-  color: var(--text-main); /* Title stays slightly brighter */
+  font-size: 1.2rem;
+  color: var(--headline);
 }
 
 .entry p {
   margin: 8px 0 0;
-  color: #e5e5e7; /* Softer white for description */
-}
-
-
-
-.gossip-desc {
+  color: var(--text);
   text-align: justify;
   text-justify: inter-word;
 }
 
+.entry small {
+  color: var(--meta-text);
+  font-style: italic;
+}
+
 .entry button {
-  background: #ff3b30;
+  background: var(--button-bg);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 8px 12px;
   margin-top: 10px;
   cursor: pointer;
@@ -127,15 +131,15 @@ h1 {
 }
 
 .entry button:hover {
-  background: #d32f2f;
+  background: var(--button-hover);
 }
 
 .add-button {
   margin-top: auto;
-  padding: 14px;
+  padding: 12px;
   font-size: 1rem;
   border: none;
-  border-radius: 12px;
+  border-radius: 6px;
   background: var(--button-bg);
   color: white;
   cursor: pointer;
@@ -152,8 +156,7 @@ h1 {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.4);
   display: none;
   align-items: center;
   justify-content: center;
@@ -163,8 +166,7 @@ h1 {
 .modal {
   background: var(--box-bg);
   padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px var(--shadow);
+  border-radius: 8px;
   width: 320px;
   display: flex;
   flex-direction: column;
@@ -173,10 +175,10 @@ h1 {
 .modal input,
 .modal textarea {
   padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #3a3a3c;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-main);
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: #fafafa;
+  color: var(--text);
   margin-bottom: 12px;
   font-size: 1rem;
 }
@@ -191,7 +193,7 @@ h1 {
   flex: 1;
   padding: 12px;
   border: none;
-  border-radius: 12px;
+  border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -207,23 +209,26 @@ h1 {
 }
 
 .modal-button.cancel {
-  background: #48484a;
+  background: #6e6e6e;
 }
 
 .modal-button.cancel:hover {
-  background: #3a3a3c;
+  background: #555;
 }
 
 .box {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
 }
 
 .box::-webkit-scrollbar {
-  display: none;
+  width: 8px;
 }
 
-
+.box::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
 
   </style>
 
