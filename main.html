@@ -6,15 +6,15 @@
   <title>Blue Box - Main</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-  --background: #f9f7f1;
-  --box-bg: #ffffff;
-  --border-color: #dcdcdc;
-  --headline: #222;
-  --text: #333;
-  --meta-text: #777;
-  --button-bg: #444;
-  --button-hover: #222;
+   :root {
+  --background: #121212;
+  --box-bg: #1e1e1e;
+  --border-color: #2a2a2a;
+  --headline: #4dabf7;
+  --text: #e0e0e0;
+  --meta-text: #aaaaaa;
+  --button-bg: #333;
+  --button-hover: #555;
 }
 
 * {
@@ -30,7 +30,7 @@ body {
 
 h1 {
   text-align: center;
-  margin: 20px 0 30px;
+  margin: 20px 0 10px;
   font-size: 2.8rem;
   font-weight: 700;
   color: var(--headline);
@@ -38,20 +38,15 @@ h1 {
   padding-bottom: 10px;
 }
 
-.top-bar {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 15px 20px;
-}
-
 .logout-button {
-  padding: 10px 20px;
-  font-size: 0.95rem;
+  display: block;
+  margin: 0 auto 20px;
+  padding: 12px 24px;
+  font-size: 1rem;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--button-bg);
-  color: #fff;
+  color: var(--text);
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -73,7 +68,7 @@ h1 {
   border: 1px solid var(--border-color);
   padding: 20px;
   border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   flex: 1 1 400px;
   max-width: 500px;
   height: 80vh;
@@ -103,7 +98,7 @@ h1 {
   font-family: 'Georgia', serif;
   font-weight: 700;
   font-size: 1.2rem;
-  color: var(--headline);
+  color: var(--text);
 }
 
 .entry p {
@@ -119,7 +114,7 @@ h1 {
 }
 
 .entry button {
-  background: var(--button-bg);
+  background: #aa3333;
   color: white;
   border: none;
   border-radius: 4px;
@@ -131,7 +126,7 @@ h1 {
 }
 
 .entry button:hover {
-  background: var(--button-hover);
+  background: #922222;
 }
 
 .add-button {
@@ -156,7 +151,7 @@ h1 {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   display: none;
   align-items: center;
   justify-content: center;
@@ -177,7 +172,7 @@ h1 {
   padding: 14px;
   border-radius: 4px;
   border: 1px solid var(--border-color);
-  background: #fafafa;
+  background: #2a2a2a;
   color: var(--text);
   margin-bottom: 12px;
   font-size: 1rem;
