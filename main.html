@@ -7,13 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-  --blue-1: #0a0f1a;
-  --blue-2: rgba(20, 30, 48, 0.6);
-  --blue-3: rgba(36, 54, 80, 0.6);
-  --blue-4: #4a70a8;
-  --accent: #3ab4f2;
-  --text-light: #f0f4fa;
-  --shadow: rgba(0, 0, 0, 0.3);
+  --background: #f5f5f7;
+  --box-bg: #ffffff;
+  --button-bg: #0071e3;
+  --button-hover: #005bb5;
+  --text-main: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --shadow: rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -22,16 +22,16 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(to bottom, #0a0f1a, #141e30);
-  color: var(--text-light);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  background: var(--background);
+  color: var(--text-main);
 }
 
 h1 {
   text-align: center;
   margin: 20px 0 40px;
   font-size: 2.5rem;
-  color: var(--accent);
+  font-weight: 600;
 }
 
 .top-bar {
@@ -49,17 +49,16 @@ h1 {
   padding: 10px 18px;
   font-size: 0.95rem;
   border: none;
-  border-radius: 12px;
-  background: linear-gradient(to right, #3a6073, #16222a);
+  border-radius: 8px;
+  background: var(--button-bg);
   color: white;
   cursor: pointer;
-  box-shadow: 0 2px 6px var(--shadow);
-  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 1px 3px var(--shadow);
+  transition: background 0.2s ease;
 }
 
 .logout-button:hover {
-  background: linear-gradient(to right, #1f2c3a, #0a0f1a);
-  transform: scale(1.03);
+  background: var(--button-hover);
 }
 
 .container {
@@ -71,42 +70,41 @@ h1 {
 }
 
 .box {
-  background: var(--blue-2);
+  background: var(--box-bg);
   padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px var(--shadow);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px var(--shadow);
   flex: 1 1 400px;
   max-width: 500px;
   height: 80vh;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  backdrop-filter: blur(12px);
 }
 
 .box h2 {
   text-align: center;
-  color: var(--blue-4);
+  color: var(--text-secondary);
   font-weight: 600;
   margin-bottom: 20px;
 }
 
 .entry {
-  background: var(--blue-3);
+  background: #f9f9f9;
   margin-bottom: 15px;
   padding: 15px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px var(--shadow);
+  border-radius: 12px;
+  box-shadow: 0 2px 5px var(--shadow);
 }
 
 .entry strong {
   font-weight: 600;
-  color: #e0f7ff;
+  color: var(--text-main);
 }
 
 .entry p {
   margin: 8px 0 0;
-  color: #d1e9ff;
+  color: var(--text-secondary);
 }
 
 .gossip-desc {
@@ -115,38 +113,35 @@ h1 {
 }
 
 .entry button {
-  background: linear-gradient(to right, #ef5a5a, #cc4444);
+  background: #d32f2f;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 8px 12px;
   margin-top: 10px;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .entry button:hover {
-  background: linear-gradient(to right, #dc3b3b, #a52828);
-  transform: scale(1.05);
+  background: #b71c1c;
 }
 
 .add-button {
   margin-top: auto;
-  padding: 12px;
+  padding: 14px;
   font-size: 1rem;
   border: none;
-  border-radius: 16px;
-  background: linear-gradient(to right, #3ab4f2, #007aff);
+  border-radius: 12px;
+  background: var(--button-bg);
   color: white;
   cursor: pointer;
-  box-shadow: 0 4px 12px var(--shadow);
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .add-button:hover {
-  background: linear-gradient(to right, #2994d1, #0055aa);
-  transform: scale(1.05);
+  background: var(--button-hover);
 }
 
 .modal-bg {
@@ -155,8 +150,7 @@ h1 {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.5);
   display: none;
   align-items: center;
   justify-content: center;
@@ -164,23 +158,22 @@ h1 {
 }
 
 .modal {
-  background: var(--blue-2);
+  background: var(--box-bg);
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 12px 32px var(--shadow);
+  box-shadow: 0 8px 24px var(--shadow);
   width: 320px;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(12px);
 }
 
 .modal input,
 .modal textarea {
   padding: 14px;
-  border-radius: 12px;
-  border: none;
-  background: var(--blue-3);
-  color: white;
+  border-radius: 8px;
+  border: 1px solid #d0d0d5;
+  background: #fafafa;
+  color: var(--text-main);
   margin-bottom: 12px;
   font-size: 1rem;
 }
@@ -195,7 +188,7 @@ h1 {
   flex: 1;
   padding: 12px;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -203,22 +196,21 @@ h1 {
 }
 
 .modal-button.add {
-  background: linear-gradient(to right, #3ab4f2, #007aff);
+  background: var(--button-bg);
 }
 
 .modal-button.add:hover {
-  background: linear-gradient(to right, #2994d1, #0055aa);
+  background: var(--button-hover);
 }
 
 .modal-button.cancel {
-  background: linear-gradient(to right, #4b5563, #374151);
+  background: #6e6e73;
 }
 
 .modal-button.cancel:hover {
-  background: linear-gradient(to right, #2c3038, #1f2227);
+  background: #4e4e52;
 }
 
-/* Hide scrollbars for clean PS5 look */
 .box {
   scrollbar-width: none;
   -ms-overflow-style: none;
