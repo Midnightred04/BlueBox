@@ -100,6 +100,28 @@
         alert('Wrong password!');
       }
     }
+    window.onload = () => {
+    refreshSection('gossip');
+    refreshSection('plans');
+  };
+
+  window.logout = function () {
+    window.location.href = "index.html";
+  };
+
+  window.cancelEntry = function () {
+    document.getElementById('entry-title').value = '';
+    document.getElementById('entry-desc').value = '';
+    document.getElementById('modal-bg').style.display = 'none';
+  };
+
+  // ✅ Service Worker Registration
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(registration => console.log('Service Worker registered:', registration))
+      .catch(error => console.log('Service Worker registration failed:', error));
+  }
+
   </script>
 </body>
 </html>
