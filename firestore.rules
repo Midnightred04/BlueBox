@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // IMPORTANT: Replace this value with the UID of your BlueBox Firebase Auth user.
+    // This placeholder denies all access until you configure it.
+    function blueBoxMember() {
+      return request.auth != null
+        && request.auth.uid == 'REPLACE_WITH_BLUEBOX_FIREBASE_AUTH_UID';
+    }
+
+    function validEntry(data) {
+      return data.keys().hasOnly(['title','desc','timestamp'])
+        && data.keys().hasAll(['title','desc','timestamp'])
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 200
+        && data.desc is string && data.desc.size() > 0 && data.desc.size() <= 10000
+        && data.timestamp is timestamp;
+    }
+
+    match /gossip/{entryId} {
+      allow get, list: if blueBoxMember();
+      allow create: if blueBoxMember() && validEntry(request.resource.data)
+        && request.resource.data.timestamp == request.time;
+      allow delete: if blueBoxMember();
+      allow update: if false;
+    }
+
+    match /plans/{entryId} {
+      allow get, list: if blueBoxMember();
+      allow create: if blueBoxMember() && validEntry(request.resource.data)
+        && request.resource.data.timestamp == request.time;
+      allow delete: if blueBoxMember();
+      allow update: if false;
+    }
+  }
+}
