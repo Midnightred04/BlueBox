@@ -232,6 +232,8 @@ body {
   border-radius: 4px;
 }
 
+    .load-status{color:var(--meta-text);margin:12px 0;text-align:center;font-size:.92rem}
+    .load-status.error{color:#ff9898}
   </style>
 
 </head>
@@ -271,7 +273,7 @@ body {
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import {
       getFirestore, collection, addDoc, getDocs, deleteDoc,
-      doc, serverTimestamp, query, orderBy
+      doc, serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -301,7 +303,7 @@ body {
         return;
       }
 
-      await addDoc(collection(db, currentType), {
+      try { await addDoc(collection(db, currentType), {
         title,
         desc,
         timestamp: serverTimestamp()
@@ -311,71 +313,90 @@ body {
       document.getElementById('entry-desc').value = '';
       document.getElementById('modal-bg').style.display = 'none';
       refreshSection(currentType);
+      } catch(error) {
+        console.error('Unable to add entry:', error);
+        alert(error.code === 'permission-denied' ? 'Firebase permission denied. Check Firestore rules.' : 'Could not save entry: ' + (error.code || error.message));
+      }
     };
 
     window.deleteEntry = async function (type, id) {
       if (confirm("Are you sure you want to delete this?")) {
-        await deleteDoc(doc(db, type, id));
-        refreshSection(type);
+        try {
+          await deleteDoc(doc(db, type, id));
+          refreshSection(type);
+        } catch(error) {
+          console.error('Unable to delete entry:', error);
+          alert(error.code === 'permission-denied' ? 'Firebase permission denied. Check Firestore rules.' : 'Could not delete entry: ' + (error.code || error.message));
+        }
       }
     };
 
     async function refreshSection(type) {
-      const box = document.getElementById(`${type}-box`);
-      box.innerHTML = `<h2>${type.charAt(0).toUpperCase() + type.slice(1)}</h2><button class="add-button" onclick="openModal('${type}')">Add New</button>`;
+      const box = document.getElementById(type + '-box');
+      const heading = document.createElement('h2');
+      heading.textContent = type === 'gossip' ? 'Gossip' : 'Plans';
+      const addButton = document.createElement('button');
+      addButton.className = 'add-button';
+      addButton.textContent = 'Add New';
+      addButton.addEventListener('click', () => openModal(type));
+      const status = document.createElement('p');
+      status.className = 'load-status';
+      status.textContent = 'Loading entries…';
+      box.replaceChildren(heading, status, addButton);
 
-      const q = query(collection(db, type), orderBy("timestamp", "desc"));
-      const snapshot = await getDocs(q);
-
-      snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const div = document.createElement('div');
-        div.className = 'entry';
-        div.innerHTML = `
-          <strong>${data.title}</strong>
-          <p class="${type === 'gossip' ? 'gossip-desc' : ''}">${data.desc}</p>
-          <button onclick="deleteEntry('${type}', '${docSnap.id}')">Delete</button>
-        `;
-        box.insertBefore(div, box.lastElementChild);
-      });
+      try {
+        // A Firestore orderBy query excludes older entries missing the timestamp field.
+        const snapshot = await getDocs(collection(db, type));
+        const entries = snapshot.docs.slice().sort((a, b) =>
+          (b.data().timestamp?.toMillis?.() ?? 0) - (a.data().timestamp?.toMillis?.() ?? 0));
+        status.remove();
+        for (const entry of entries) {
+          const data = entry.data();
+          const article = document.createElement('div');
+          article.className = 'entry';
+          const title = document.createElement('strong');
+          title.textContent = data.title || 'Untitled';
+          const description = document.createElement('p');
+          if (type === 'gossip') description.className = 'gossip-desc';
+          description.textContent = data.desc || '';
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.addEventListener('click', () => deleteEntry(type, entry.id));
+          article.append(title, description, deleteButton);
+          box.insertBefore(article, addButton);
+        }
+        if (!entries.length) {
+          status.textContent = 'No entries found in this collection.';
+          box.insertBefore(status, addButton);
+        }
+      } catch (error) {
+        console.error('Blue Box failed to load ' + type + ':', error);
+        status.classList.add('error');
+        status.textContent = error.code === 'permission-denied'
+          ? 'Firebase permission denied. Check Firestore Database → Rules for black-box-44047.'
+          : 'Unable to load entries (' + (error.code || 'unknown error') + '). Check the browser console.';
+      }
     }
 
-    window.onload = () => {
-      refreshSection('gossip');
-      refreshSection('plans');
+
+    window.logout = function () { window.location.href = 'index.html'; };
+    window.cancelEntry = function () {
+      document.getElementById('entry-title').value = '';
+      document.getElementById('entry-desc').value = '';
+      document.getElementById('modal-bg').style.display = 'none';
     };
-    window.logout = function () {
-  window.location.href = "index.html";
-}
-  window.cancelEntry = function () {
-  document.getElementById('entry-title').value = '';
-  document.getElementById('entry-desc').value = '';
-  document.getElementById('modal-bg').style.display = 'none';
-};
-
-  window.onload = () => {
-    refreshSection('gossip');
-    refreshSection('plans');
-  };
-
-  window.logout = function () {
-    window.location.href = "index.html";
-  };
-
-  window.cancelEntry = function () {
-    document.getElementById('entry-title').value = '';
-    document.getElementById('entry-desc').value = '';
-    document.getElementById('modal-bg').style.display = 'none';
-  };
 
   // ✅ Service Worker Registration
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker.register('./service-worker.js')
       .then(registration => console.log('Service Worker registered:', registration))
       .catch(error => console.log('Service Worker registration failed:', error));
   }
 
 
+
+    refreshSection('gossip');
+    refreshSection('plans');
 
   </script>
 </body>
