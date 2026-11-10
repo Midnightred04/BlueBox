@@ -271,31 +271,28 @@ body {
   <!-- Firebase + Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
     import {
       getFirestore, collection, addDoc, getDocs, deleteDoc,
       doc, serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCd-bOBCPclL-A2GWPosoSX-MOMTtQFi5M",
-      authDomain: "black-box-44047.firebaseapp.com",
-      projectId: "black-box-44047",
-      storageBucket: "black-box-44047.firebasestorage.app",
-      messagingSenderId: "1007734936886",
-      appId: "1:1007734936886:web:696655ce5befea36120f97"
-    };
-
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const auth = getAuth(app);
+    let authorized = false;
 
     let currentType = '';
 
     window.openModal = function (type) {
+      if (!authorized) return;
       currentType = type;
       document.getElementById('modal-bg').style.display = 'flex';
     };
 
     window.addEntry = async function () {
+      if (!authorized) return;
       const title = document.getElementById('entry-title').value.trim();
       const desc = document.getElementById('entry-desc').value.trim();
       if (!title || !desc) {
@@ -320,6 +317,7 @@ body {
     };
 
     window.deleteEntry = async function (type, id) {
+      if (!authorized) return;
       if (confirm("Are you sure you want to delete this?")) {
         try {
           await deleteDoc(doc(db, type, id));
@@ -379,7 +377,9 @@ body {
     }
 
 
-    window.logout = function () { window.location.href = 'index.html'; };
+    window.logout = async function () {
+      try { await signOut(auth); } finally { location.replace('./index.html?loggedout=1'); }
+    };
     window.cancelEntry = function () {
       document.getElementById('entry-title').value = '';
       document.getElementById('entry-desc').value = '';
@@ -395,8 +395,21 @@ body {
 
 
 
-    refreshSection('gossip');
-    refreshSection('plans');
+    // Firestore must never initialize before a real Firebase authentication session.
+    document.querySelectorAll('.box .add-button').forEach(button => button.disabled = true);
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        authorized = false;
+        location.replace('./index.html?loggedout=1');
+        return;
+      }
+      authorized = true;
+      refreshSection('gossip');
+      refreshSection('plans');
+    }, error => {
+      console.error('BlueBox authentication failed:', error);
+      location.replace('./index.html?loggedout=1');
+    });
 
   </script>
 </body>
