@@ -54,7 +54,7 @@
       max-width: 400px;
     }
 
-    input[type="password"] {
+    input[type="password"],input[type="email"] {
       padding: 12px 16px;
       font-size: 1rem;
       border: none;
@@ -86,25 +86,46 @@
 </head>
 <body>
   <h1>Blue Box</h1>
-  <div class="login-box">
-    <input type="password" id="password" placeholder="Enter Password">
-    <button onclick="checkPassword()">Enter</button>
-  </div>
+  <form class="login-box" id="login-form">
+    <input type="email" id="email" placeholder="Firebase account email" autocomplete="username" required>
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+    <button id="login-button" type="submit">Enter</button>
+    <p id="login-error" role="alert" aria-live="polite" style="color:#ffb3b3;font-size:.9rem;line-height:1.5" hidden></p>
+  </form>
 
-  <script>
-    function checkPassword() {
-      const password = document.getElementById('password').value;
-      if (password === 'lemmein') {
-        window.location.href = 'main.html';
-      } else {
-        alert('Wrong password!');
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
+    const auth = getAuth(initializeApp(firebaseConfig));
+    const form = document.getElementById('login-form');
+    const message = document.getElementById('login-error');
+    const button = document.getElementById('login-button');
+    const params = new URLSearchParams(location.search);
+    if (params.has('loggedout')) {
+      message.textContent = 'You have been signed out.';
+      message.hidden = false;
+    } else {
+      onAuthStateChanged(auth, user => {
+        if (user) location.replace('./main.html');
+      });
+    }
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      button.disabled = true;
+      message.hidden = true;
+      try {
+        await setPersistence(auth, browserLocalPersistence);
+        await signInWithEmailAndPassword(auth, document.getElementById('email').value.trim(), document.getElementById('password').value);
+        location.replace('./main.html');
+      } catch(error) {
+        message.textContent = 'Unable to sign in. Check your Firebase account credentials and whether Email/Password sign-in is enabled.';
+        message.hidden = false;
+        console.error('BlueBox Firebase sign-in failed:', error.code || error);
+      } finally {
+        button.disabled = false;
       }
-    }
-    // Relative path: this site is hosted under /BlueBox/ on GitHub Pages.
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
-        .catch(error => console.warn('Service worker registration failed:', error));
-    }
+    });
   </script>
 </body>
 </html>
